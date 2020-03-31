@@ -3,7 +3,7 @@ const Discord = require('discord.js')
   module.exports = {
     name: 'random-image',
     aliases: ['random', 'image'],
-  category: 'fun',
+  category: 'misc',
   usage: 'pichu random-image <tag>',
 	description: "Shows a random image",
 	async execute (client,message,args) {

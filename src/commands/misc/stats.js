@@ -16,24 +16,29 @@ let seconds = totalSeconds % 60;
 
 let playingmusic = queue.size
 if (!playingmusic) playingmusic = 0
-
+let cpuusage;
+ require('cpu-stat').usagePercent((err, percent, seconds) => cpuusage = Math.round(percent))
 
     const embed1 = new Discord.MessageEmbed()
     .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
     .setColor('#5147FF')
     .setImage(`https://top.gg/api/widget/${client.user.id}.png)`)
     .setAuthor('Bot stats: ')
-    .addFields(
-      {name: 'Uptime :', value: `${days} days, ${hours} hours, ${minutes} minutes and ${Math.round(seconds)} seconds`, inline: true},
-      {name: 'Guilds :', value: client.guilds.cache.size.toLocaleString(), inline: true},
-      {name: 'Bot version :', value: client.version, inline: true},
-      {name: 'Messages seen :', value: messagecounter[0].toLocaleString(), inline: true},
-      {name: 'Commands executed: ', value: messagecounter[1].toLocaleString(), inline: true},
-      {name: 'Events received :', value: messagecounter[2].toLocaleString(), inline: true},
-      {name: 'Total users :', value: client.functions.get('totalUsers').execute(client), inline: true},
-      {name: 'Number of servers playing music thx to me :', value: playingmusic, inline: true},
-      {name: 'Number of commands :', value: client.commands.size, inline: true}
-    )
+    .setDescription([`
+    Uptime: **${days}d, ${hours}h, ${minutes}m, ${Math.round(seconds)}s**
+    Guilds: **${client.guilds.cache.size}**
+    Users; **${client.functions.get('totalUsers').execute(client)}**
+    Commands: **${client.commands.size}**
+    Commands executed: **${messagecounter[1].toLocaleString()}**
+    Playing servers: **${playingmusic}**
+    Messages seen: **${messagecounter[0].toLocaleString()}**
+    Events received: **${messagecounter[2].toLocaleString()}**
+    Bot version: **${client.version}**
+    CPUs: **${require('os').cpus().length}**
+    CPU usage: **${cpuusage}%**
+    RAM Usage: **${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)+'MB'}/${Math.round(require('os').totalmem()/1000000000)+'GB'}**
+    `])
+
     .setFooter('Made by Lumap#0149')
     
     message.channel.send(embed1)

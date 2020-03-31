@@ -1,6 +1,7 @@
 const Discord = require('discord.js')
 module.exports = {
 	name: 'skip',
+	aliases: ['sk'],
   category: 'music',
   usage: 'pichu skip',
 	description: 'Skip the current song',

@@ -21,7 +21,8 @@ module.exports = {
             }
             return a;
         }
-        serverQueue.songs = shuffle(serverQueue.songs)
+        serverQueue.songs = [serverQueue.songs[0],...shuffle(serverQueue.songs)]
+
         
         message.channel.send(new Discord.MessageEmbed()
         .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))

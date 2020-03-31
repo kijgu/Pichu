@@ -1,16 +1,19 @@
 module.exports = {
     name: 'lyrics',
-    usage: 'pichu lyrics <song name> OR pichu lyrics if a song is currently playing',
+    usage: 'pichu lyrics <song name>',
     description: 'Shows lyrics of a song',
     category: 'music',
     async execute(client,message,args,dbl,queue) {
-        if (!args.join(' ') && !queue.get(message.guild.id)) return message.channel.send('Please proide a song name')
-        if (queue.get(message.guild.id).songs[0] && !args.join(' ')) args = queue.get(message.guild.id).songs[0].title.split(' ')
+        if (queue.get(message.guild.id) && !args.join(' ')) {
+            args = queue.get(message.guild.id).songs[0].title.split(' ')
+        }
+        if (!args.join(' ')) return message.channel.send('Please proide a song name')
+       
         let msg = await message.channel.send('Loading...')
         const solenolyrics= require("solenolyrics"); 
         const Discord = require('discord.js')
     var lyrics;
-     await solenolyrics.requestLyricsFor(args.join(' ')).then(res => res.json ? res.json() : res).then(r => lyrics=r).catch(error => console.log(error))
+     await solenolyrics.requestLyricsFor(args.join(' ')).then(res => res).then(r => lyrics=r).catch(error => console.log(error))
     var title = await solenolyrics.requestTitleFor(args.join(' ')); 
     var author = await solenolyrics.requestAuthorFor(args.join(' ')); 
     if (!lyrics) return message.channel.send('Lyrics not found!')

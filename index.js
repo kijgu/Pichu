@@ -7,6 +7,7 @@ const config = require('./config.json')
 client.config = config
 client.version = require('./package.json').version
 client.snipes = new Discord.Collection()
+let cooldown = new Set()
 let queue = new Map()
 let messagecounter = [0, 0, 0] 
 
@@ -32,9 +33,8 @@ dbl.webhook.on('error', e => {
 })
 
 dbl.webhook.on('vote', vote => {
-  user = client.users.cache.get(vote.user)
-  client.channels.cache.get(client.config.dbl.voteChannelID).send(new Discord.MessageEmbed().setColor('RANDOM').setThumbnail(user.avatarURL({ format: 'png', dynamic: true, size: 2048 })).setDescription(`Thanks you for voting <@${user.id}> (**${user.id}**)! As a reward, you get... Eternal respect from my dev`))
-});
+  require('./src/events/vote.js')(vote)
+  });
 
 client.functions = new Discord.Collection()
 for (let i = 0; i < require('fs').readdirSync('./src/functions/').length; i++) {
@@ -99,7 +99,7 @@ client.on('raw', () => {
 });
 
 client.on('message', async message => {
-  msg(client,message,dbl,queue,messagecounter)
+  msg(client,message,cooldown,dbl,queue,messagecounter)
 });
 
 client.login(client.config.tokens.bot)

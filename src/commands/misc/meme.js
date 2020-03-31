@@ -3,7 +3,7 @@ const Discord = require('discord.js')
   module.exports = {
 	name: 'meme',
 aliases: ['memes'], 
-  category: 'fun',
+  category: 'misc',
   usage: 'pichu meme',
 	description: "Shows a meme",
 	async execute (client,message) {

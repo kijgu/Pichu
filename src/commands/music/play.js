@@ -166,7 +166,7 @@ username: message.author.username
 			serverQueue.message.delete()
 		}
 	  
-		serverQueue.connection.play(ytdl(song.id))
+		serverQueue.connection.play(ytdl(song.id, {filter: 'audioonly',highWaterMark:600,volume:1}))
 		  .on("finish", () => {
 			serverQueue.songs.shift();
 			if (serverQueue.songs[0]) {
@@ -181,7 +181,11 @@ username: message.author.username
 			}
 			playSong(guild, queue, serverQueue.songs[0])
 		  })
-		  .on("error", console.error)
+		  .on("error", () => {
+			  console.error
+			  serverQueue.qongs.shift()
+			  playSong(guild,queue,serverQueue.songs[0])
+			})
 		  .setVolumeLogarithmic(serverQueue.volume / 250)
 		const embednp = new Discord.MessageEmbed()
 		.setColor('RANDOM')

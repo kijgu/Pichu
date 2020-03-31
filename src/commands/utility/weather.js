@@ -1,6 +1,5 @@
 module.exports = {
 	name: 'weather',
-    aliases: ['w'], 
     usage: 'pichu weather <C/F> <city>',
     category: 'utility',
 	description: "Shows weather of a city",
