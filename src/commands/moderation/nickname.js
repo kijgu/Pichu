@@ -7,7 +7,7 @@ module.exports = {
         if(!message.member.permissions.toArray().includes("MANAGE_NICKNAMES")) return message.channel.send(new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setDescription('Sorry, but you don\'t have the right permissions to do that!')
-        .setFooter('Made by Lumap"0149'))
+        )
 
         let member = message.mentions.members.first() || message.guild.members.cache.get(args.join(' '))
         if (!member) return message.channel.send('Please provide a user id or @mention someone!')

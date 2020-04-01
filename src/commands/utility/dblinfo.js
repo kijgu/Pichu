@@ -9,7 +9,7 @@
     usage: 'pichu dblinfo <@mention/bot-id/bot-name>',
     async execute(client,message,args,dbl) {
         if (!args.join(' ')) return message.channel.send('Please mention the bot, give bot ID or bot name');
-        let member = client.functions.get('findByID').execute(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.get('findByUsername').execute(message.guild,args.join(' ')) || message.member
+        let member = client.functions.findByID(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.findByUsername(message.guild,args.join(' ')) || message.member
         let user = member.user
        if (!user) return message.channel.send('Bot not found!');
         if (!user.bot) return message.channel.send('This is not a bot!');
@@ -47,7 +47,6 @@
             else {e.addFields({ name: 'Is bot certified ?', value: 'No', inline: true })}
             if (bot.vanity) {e.addFields({ name: 'Bot vanity URL :', value: bot.vanity, inline: true })}
             e.addFields({name: 'Links', value: links, inline: true})
-            e.setFooter('Made by Lumap#0149')
             message.channel.send(e)
         })
     },

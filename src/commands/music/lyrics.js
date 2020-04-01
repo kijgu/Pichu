@@ -25,7 +25,7 @@ module.exports = {
     .setColor('RANDOM')
     .setTitle(`Lyrics for ${title} by ${author}`)
     .setDescription(lyrics)
-    .setFooter('Made with solenolyrics | Made by Lumap#0149'))
+    .setFooter('Made with solenolyrics'))
 
     }
 }

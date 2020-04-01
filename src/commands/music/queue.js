@@ -21,15 +21,13 @@ module.exports = {
         
         const Discord = require('discord.js')
         let queueemb = new Discord.MessageEmbed()
-        .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
+
         .setColor('RANDOM')
         .setAuthor('Server queue')
         .setDescription(`**__Now playing :__** \n[${serverQueue.songs[0].title}](${serverQueue.songs[0].url})\n\n**__Incoming :__** \n${output.join(' ')}`)
         if (serverQueue.songs.length > 11) 
-        {queueemb.setFooter(`${serverQueue.songs.length-11} more songs... | Made by Lumap#0149`)
-      } else {
-        queueemb.setFooter('Made by Lumap#0149')
-      }
+        {queueemb.setFooter(`${serverQueue.songs.length-11} more songs...`)
+      } 
         message.channel.send(queueemb)
        // message.channel.send([
         //    "__**Song queue:**__",

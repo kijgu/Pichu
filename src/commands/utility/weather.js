@@ -33,7 +33,7 @@ weather.find({search: city, degreeType: degreetype}, function(err, result) {
         {name: 'winds',value: current.winddisplay, inline: true},
         {name: 'humidity', value: `${current.humidity}%`, inline: true}
         )
-        .setFooter('Made by Lumap#0149') 
+      
         message.channel.send(embed);
 });
  

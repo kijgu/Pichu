@@ -13,8 +13,8 @@ module.exports = {
    let emb = new Discord.MessageEmbed()
    .setColor('RANDOM')
    .setTitle(`Coronavirus stats in ${country.country} :`)
-   .setDescription(`Total cases: **${country.cases}**\nToday cases : **${country.todayCases}**\nDeaths : **${country.deaths}**\nToday deaths : **${country.todayDeaths}**\nRecovered : **${country.recovered}**\nActive cases: **${country.active}**\nCritical persons : **${country.critical}**`)
-   .setFooter('Made by Lumap#0149')
+   .setDescription(`Total cases: **${country.cases.toLocaleString()}**\nToday cases : **${country.todayCases.toLocaleString()}**\nDeaths : **${country.deaths.toLocaleString()}**\nToday deaths : **${country.todayDeaths.toLocaleString()}**\nRecovered : **${country.recovered.toLocaleString()}**\nActive cases: **${country.active.toLocaleString()}**\nCritical  : **${country.critical.toLocaleString()}**`)
+  
    if (country.countryInfo) {emb.setThumbnail(country.countryInfo.flag)}
    message.channel.send(emb)
     } else {
@@ -22,8 +22,8 @@ module.exports = {
         let emb = new Discord.MessageEmbed()
         .setColor('RANDOM')
         .setTitle('Coronavirus stats all around the world :')
-        .setFooter('Made by Lumap#0149')
-        .setDescription(`Total cases : **${all.cases}**\nTotal deaths : **${all.deaths}**\nTotal recovered : **${all.recovered}**\nUpdated : **${new Date(all.updated)}**`)
+       
+        .setDescription(`Total cases : **${all.cases.toLocaleString()}**\nTotal deaths : **${all.deaths.toLocaleString()}**\nTotal recovered : **${all.recovered.toLocaleString()}**\nUpdated : **${new Date(all.updated)}**`)
         message.channel.send(emb)
     }
     }

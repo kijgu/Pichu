@@ -19,11 +19,11 @@ module.exports = {
 		if (!permissions.has("CONNECT")) return message.channel.send(new Discord.MessageEmbed()
 		.setColor('RANDOM')
 		.setDescription('I don\'t have the permissions to connect to a voice channel')
-		.setFooter('Made by Lumap#0149'))
+		)
 		if (!permissions.has("SPEAK")) return message.channel.send(new Discord.MessageEmbed()
 		.setColor('RANDOM')
 		.setDescription('I don\'t have the permissions to talk here!')
-		.setFooter('Made by Lumap#0149'))
+		)
 	  if (!args.join(' ')) return message.channel.send('Please provide me a youtube URL or a song name!')
 		const url = args.join(" ")
 		if (url.includes("list=")) {
@@ -35,7 +35,7 @@ module.exports = {
 		  m.edit(new Discord.MessageEmbed()
 		  .setColor('RANDOM')
 		  .setDescription(`${playlist.title}(${videos.length} songs) has been added to the queue!`)
-		  .setFooter('Made by Lumap#0149 | Hint : playlists max length is 100')).then(m => {setTimeout(() => {m.delete()}, 15000)})
+		  .setFooter('Playlists max length is 100')).then(m => {setTimeout(() => {m.delete()}, 15000)})
 			})
 		} else {
 		  let video;
@@ -55,7 +55,7 @@ module.exports = {
 				videos.map(v => ++index + " - **" + v.title + "**").join("\n"),
 				"**Select your song by sending the number from 1 to " + videos.length + " in chat.**"
 			  ].join("\n\n"))
-			  .setFooter('Made by Lumap#0149 | You have 15 seconds to give a response')).then(m => { selectionMessage = m})
+			  .setFooter('You have 15 seconds to give a response')).then(m => { selectionMessage = m})
 	  
 			  let response;
 			  try {
@@ -69,8 +69,7 @@ module.exports = {
 				  
 				return message.channel.send(new Discord.MessageEmbed()
 				.setColor('RANDOM')
-				.setDescription('Video selection timed out, cancelling it...')
-				.setFooter('Made by Lumap#0149')).then(m => {setTimeout(() => {m.delete()}, 15000)})
+				.setDescription('Video selection timed out, cancelling it...')).then(m => {setTimeout(() => {m.delete()}, 15000)})
 			  }
 			  selectionMessage.delete()
 			  const videoIndex = parseInt(response.first().content)
@@ -79,8 +78,7 @@ module.exports = {
 			  console.log(e)
 			  return message.channel.send(new Discord.MessageEmbed()
 			  .setColor('RANDOM')
-			  .setDescription('I wasn\'t able to find a result :(')
-			  .setFooter('Made by Lumap#0149')).then(m => {setTimeout(() => {m.delete()}, 15000)})
+			  .setDescription('I wasn\'t able to find a result :(')).then(m => {setTimeout(() => {m.delete()}, 15000)})
 			}
 		  }
 		  let addedtoqueue;
@@ -158,7 +156,7 @@ username: message.author.username
 		if (serverQueue.songs === [] || !song) {
 		  serverQueue.voiceChannel.leave();
 		  queue.delete(guild.id);
-		message.channel.send(new Discord.MessageEmbed().setColor('RANDOM').setDescription('Queue has ended, leaving voice channel...').setFooter('Thank you for using pichu! | Made by Lumap#0149')) 
+		message.channel.send(new Discord.MessageEmbed().setColor('RANDOM').setDescription('Queue has ended, leaving voice channel...').setFooter('Thank you for using pichu!')) 
 		  return;
 		}
 
@@ -194,12 +192,10 @@ username: message.author.username
 		.setDescription(`Song: **[${song.title}](${song.url})**\nRequested by **${song.author.username}**\nDuration: **${song.duration}**\nArtist: **${song.artist}**`)
 		let rng = Math.floor(Math.random()*10)
 		if (rng === 5) {
-			embednp.setFooter('Please consider voting for me if you like me! pichu vote | Made by Lumap#0149')
+			embednp.setFooter('Please consider voting for me if you like me! pichu vote')
 		} else if (rng === 2) {
-			embednp.setFooter('Do you like this bot? if yes, consider adding it in your server to support my dev! pichu invite | Made by Lumap#0149')
-		} else {
-			embednp.setFooter('Made by Lumap#0149')
-		}
+			embednp.setFooter('Do you like this bot? if yes, consider adding it in your server to support my dev! pichu invite')
+		} 
 		serverQueue.textChannel.send(embednp).then(msg => {
 			serverQueue.message = msg
 		})

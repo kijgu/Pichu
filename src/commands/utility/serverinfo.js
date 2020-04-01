@@ -43,7 +43,7 @@ module.exports = {
           {name: 'Is this guild verified ?', value: verified, inline: true},
           {name: 'Role list :', value: rolelist}
         )
-        .setFooter('Made by Lumap#0149')
+      
         message.channel.send(e)
 	},
 };

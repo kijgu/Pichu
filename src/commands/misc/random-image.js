@@ -20,12 +20,11 @@ const Discord = require('discord.js')
           async function main() {
               const { url } = await ksoft.images.reddit(args.join(' '));
               message.channel.send(new Discord.MessageEmbed()
-              .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
-      .setColor('RANDOM')
+     .setColor('RANDOM')
       .setDescription(`Image not showing? Click [here](${url}) !`)
       .setImage(url)
       .setTimestamp()
-        .setFooter('Powered by Ksoft.si | Made by Lumap#0149')) 
+        .setFooter('Powered by Ksoft.si')) 
         }
           
           main();

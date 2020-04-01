@@ -4,7 +4,7 @@
     "port": "5000",
     "prefix": "pichu ",
     "tokens": {
-
+        "discord_boats": "discord boats token",
         "bot": "bot token",
         "dbl": "dbl token",
         "ksoft": "ksoftsi token"

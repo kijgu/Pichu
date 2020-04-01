@@ -33,17 +33,25 @@ dbl.webhook.on('error', e => {
 })
 
 dbl.webhook.on('vote', vote => {
-  require('./src/events/vote.js')(vote)
+  require('./src/events/vote.js')(vote,client)
   });
 
-client.functions = new Discord.Collection()
-for (let i = 0; i < require('fs').readdirSync('./src/functions/').length; i++) {
-  var commandFiles = fs
-    .readdirSync(`./src/functions`)
-    .filter(file => file.endsWith('.js'));
-  for (var file of commandFiles) {
-    var f = require(`./src/functions/${file}`);
-    client.functions.set(f.name, f)
+  const BOATS = require('boats.js');
+const Boats = new BOATS(client.config.tokens.discord_boats);
+ 
+
+
+client.functions = {
+  findByID: function(guild,id) {
+    return guild.members.cache.find(u => u.user.id === id);
+  },
+  findByUsername: function(guild,username) {
+  return guild.members.cache.find(u => u.user.username.toLowerCase() === username.toLowerCase());
+},
+  totalUsers: function(client) {
+    let userCount = 0;
+        client.guilds.cache.forEach(g => userCount += g.memberCount)
+        return userCount.toLocaleString()
   }
 }
 
@@ -83,7 +91,14 @@ client.on('messageDelete', (message) => {
 
 client.on('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`)
-  client.user.setActivity(` ${client.config.prefix}help | ${client.guilds.cache.size} servers | ${client.functions.get('totalUsers').execute(client)} users`)
+  setInterval(function(){
+Boats.postStats(client.guilds.cache.size, "674497635171696644").then(() => {
+  console.log('Successfully updated server count.');
+}).catch((err) => {
+  console.error(err);
+});
+  },1800000);
+  client.user.setActivity(` ${client.config.prefix}help | ${client.guilds.cache.size} servers | ${client.functions.totalUsers(client)} users`)
 })
 
 client.on("reconnecting", () => {
@@ -99,6 +114,10 @@ client.on('raw', () => {
 });
 
 client.on('message', async message => {
+  msg(client,message,cooldown,dbl,queue,messagecounter)
+});
+
+client.on('messageUpdate', async (oldMessage,message) => {
   msg(client,message,cooldown,dbl,queue,messagecounter)
 });
 

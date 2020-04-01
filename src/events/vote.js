@@ -1,5 +1,6 @@
 const db = require('quick.db')
 var economy = new db.table('economy')
+const Discord = require('discord.js')
 module.exports = async (vote,client) => {
     user = client.users.cache.get(vote.user)
     if(!economy.get(`${user.id}.bal`)) economy.set(`${user.id}.bal`, 0)
