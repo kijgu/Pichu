@@ -16,6 +16,6 @@ module.exports = {
 			limit: amount,
 		});
         message.channel.bulkDelete(fetched)
-        message.channel.send(new Discord.MessageEmbed()    .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048})).setColor('RANDOM').setTitle("Purge succesfull").setDescription(`**${amount}** Messages have been purged :white_check_mark:`).setFooter('Made by Lumap#0149 and Link#4444')).then(m => setTimeout(() => {m.delete()},5000))
+        message.channel.send(new Discord.MessageEmbed()    .setColor('RANDOM').setTitle("Purge succesfull").setDescription(`**${amount}** Messages have been purged :white_check_mark:`)).then(m => setTimeout(() => {m.delete()},5000))
     }, 
 }

@@ -8,23 +8,20 @@ module.exports = {
       async execute(client,message,args,dbl,queue) {
 
         if (!message.member.voice.channel) return message.channel.send(new Discord.MessageEmbed()
-        .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
-        .setColor('RANDOM')
+         .setColor('RANDOM')
         .setDescription('You are not in a voice channel!')
-        .setFooter('Made by Lumap#0149'))
+      )
 
   const serverQueue = queue.get(message.guild.id)
   if (!serverQueue) return message.channel.send(new Discord.MessageEmbed()
-  .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
-  .setColor('RANDOM')
+ .setColor('RANDOM')
   .setDescription('Nothing is playing right now :(')
-  .setFooter('Made by Lumap#0149'))
+)
 
   if (!args[0]) return message.channel.send(new Discord.MessageEmbed()
-  .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
   .setColor('RANDOM')
   .setDescription(`The current volume is **${serverQueue.volume}**`)
-  .setFooter('Made by Lumap#0149'));
+  );
 
   if (serverQueue.songs[0].author.id !== message.author.id) return message.channel.send(new Discord.MessageEmbed() .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048})) .setColor('RANDOM') .setDescription(`Only **${serverQueue.songs[0].author.username}** can change the volume, beacause he requested the current song`))
 	

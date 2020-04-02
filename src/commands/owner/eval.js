@@ -29,7 +29,7 @@ module.exports = {
         {name: 'Input :', value: `\`\`\`js\n${args.join(' ')}\`\`\``},
         {name: 'Output', value: `\`\`\`js\n${evaled}\`\`\``}
       )
-      .setFooter('Made by Lumap#0149')
+     
       message.react('✅').then(message.channel.send(successembed))};
     } catch (err) {
       const failureembed = new Discord.MessageEmbed()
@@ -39,7 +39,7 @@ module.exports = {
         {name: 'Input :', value: `\`\`\`js\n${args.join(' ')}\`\`\``},
         {name: 'Error :', value: `\`\`\`js\n${err}\`\`\``}
         )
-        .setFooter('Made by Lumap#0149')
+        
       message.react('✖️').then(message.channel.send(failureembed));
     }
   },

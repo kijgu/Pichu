@@ -1,11 +1,13 @@
 const db = require('quick.db')
 var prefixdb = new db.table('prefix')
+var vote = new db.table('vote')
 module.exports = {
     name: 'prefix',
     description: 'Sets prefix for this server',
     usage: 'pichu prefix <set/reset> <new prefix>',
     category: 'utility',
     async execute(client,message,args) {
+        if (!vote.get(`${message.author.id}`) || vote.get(`${message.author.id}`)<0) return message.channel.send('Due to how custom prefixes makes the bot laggy, the prefix command is vote only. Please use `pichu vote` and click the first link to get a registered vote!')
         if (!args) return message.channel.send('Please provide args! To know this server prefix, just mention me!')
         if (args[0] === 'reset') {
             if (!message.member.permissions.toArray().includes("ADMINISTRATOR")) return message.channel.send('Only the server admins can change my prefix!');

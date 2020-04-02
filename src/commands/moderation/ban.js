@@ -13,13 +13,13 @@ module.exports = {
 	description: 'Ban a user',
 	execute(client,message,args) {
 		const nouser = new Discord.MessageEmbed()
-.setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
+
 .setColor('#5147FF')
 .setAuthor("You didn't provide a userid/@mention")
 
 
 const missingpermsfromauthor = new Discord.MessageEmbed()
-.setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
+
 .setColor('#5147FF')
 .setAuthor("You don't have the following permission : 'BAN_MEMBERS'")
 
@@ -35,11 +35,10 @@ if(!message.member.permissions.toArray().includes("BAN_MEMBERS"))
     
 		
 const userbanned = new Discord.MessageEmbed()
-.setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
 .setColor('#5147FF')
 .setAuthor('User banned!')
 .setDescription(`**${user.user.username}#${user.user.discriminator}** is now banned from this server!`)
-.setFooter("Made by Lumap#0149'");
+
     
     user.send(`You were banned from **${message.guild.name}** by ${message.author.username}#${message.author.discriminator}`)
 		return user

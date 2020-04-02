@@ -13,23 +13,26 @@ hours %= 24;
 totalSeconds %= 3600;
 let minutes = Math.floor(totalSeconds / 60);
 let seconds = totalSeconds % 60;
+let totalServers = await client.shard.fetchClientValues('guilds.cache.size')
 
 let playingmusic = queue.size
 if (!playingmusic) playingmusic = 0
-let cpuusage;
- require('cpu-stat').usagePercent((err, percent, seconds) => cpuusage = Math.round(percent))
+let cpuusage = await require('cpu-stat').usagePercent((err, percent, seconds) => {Math.round(percent)})
+ let totalUsers = await client.shard.broadcastEval('this.guilds.cache.reduce((prev, guild) => prev + guild.memberCount, 0)')
 
     const embed1 = new Discord.MessageEmbed()
-    .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
     .setColor('#5147FF')
     .setImage(`https://top.gg/api/widget/${client.user.id}.png)`)
     .setAuthor('Bot stats: ')
     .setDescription([`
     Uptime: **${days}d, ${hours}h, ${minutes}m, ${Math.round(seconds)}s**
-    Guilds: **${client.guilds.cache.size}**
-    Users; **${client.functions.get('totalUsers').execute(client)}**
+    Creator: **${client.config.ownerTag}**
+    Guilds: **${totalServers}**
+    Users; **${totalUsers}**
     Commands: **${client.commands.size}**
     Commands executed: **${messagecounter[1].toLocaleString()}**
+    Number of shards: **${client.options.shardCount}**
+    Current shard: **${client.options.shards[0]}**
     Playing servers: **${playingmusic}**
     Messages seen: **${messagecounter[0].toLocaleString()}**
     Events received: **${messagecounter[2].toLocaleString()}**
@@ -39,7 +42,6 @@ let cpuusage;
     RAM Usage: **${Math.round(process.memoryUsage().heapUsed / 1024 / 1024)+'MB'}/${Math.round(require('os').totalmem()/1000000000)+'GB'}**
     `])
 
-    .setFooter('Made by Lumap#0149')
     
     message.channel.send(embed1)
   },

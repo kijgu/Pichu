@@ -20,12 +20,11 @@ aliases: ['memes'],
           async function main() {
               const meme = await ksoft.images.meme({nsfw: false});
               message.channel.send(new Discord.MessageEmbed()
-              .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
       .setColor('RANDOM')
       .setDescription(`Image not showing? Click [here](${meme.url}) ! | [Link to the original post](${meme.post.link})`)
       .setImage(meme.url)
       .setTimestamp()
-        .setFooter('Powered by Ksoft.si | Made by Lumap#0149')) // discord.js
+        .setFooter('Powered by Ksoft.si')) // discord.js
         message.channel.stopTyping()
           }
           

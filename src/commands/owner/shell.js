@@ -10,7 +10,7 @@ module.exports = {
   description: "It's a cool command!",
   async execute(client,message,args) {
 if (!args) return message.channel.Send('No command to execute provided, time to do nothing...')
- let date = new Date()
+ 
   exec(args.join(" "), function (err, stdout, stderr) {
     if (!err) err = "-"
     if (!stdout) stdout = "-"
@@ -27,7 +27,7 @@ if (!args) return message.channel.Send('No command to execute provided, time to 
           {name: "**stdout**", value: stdout + "** **"},
           {name: "**stderr**", value: stderr + "** **"}
         )
-        .setFooter('Made by Lumap#0149')
+     
       message.channel.send(embed);
     };
   });
