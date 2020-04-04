@@ -1,13 +1,9 @@
-<<<<<<< HEAD
+
 const db = require('quick.db');
 var economy = new db.table('economy');
 var votedb = new db.table('vote');
 const Discord = require('discord.js');
-=======
-const db = require('quick.db')
-var economy = new db.table('economy')
-const Discord = require('discord.js')
->>>>>>> c93d56eab2ded4c475044d294fc2df11dacb4128
+
 module.exports = async (vote,client) => {
     user = client.users.cache.get(vote.user)
     if(!economy.get(`${user.id}.bal`)) economy.set(`${user.id}.bal`, 0)
