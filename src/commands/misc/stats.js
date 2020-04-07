@@ -13,10 +13,13 @@ hours %= 24;
 totalSeconds %= 3600;
 let minutes = Math.floor(totalSeconds / 60);
 let seconds = totalSeconds % 60;
+//let totalServers = await client.shard.fetchClientValues('guilds.cache.size')
+
 
 let cpuusage;
  require('cpu-stat').usagePercent((err, percent, seconds) => cpuusage = Math.round(percent))
  let totalUsers = client.functions.totalUsers(client)
+
 
     const embed1 = new Discord.MessageEmbed()
     .setColor('#5147FF')

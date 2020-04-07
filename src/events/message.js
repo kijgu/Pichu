@@ -26,9 +26,7 @@ module.exports = async (client,message,cooldown,dbl,messagecounter) => {
     if (command.category === 'owner') {
       if (message.author.id !== client.config.ownerID) return message.reply("You tried to execute a owner-only command, and you can't do that :(")
     }
-    if (command.category === 'music') {
-      if (message.author.id !== client.config.ownerID) return message.reply("Hi. Due to a lot of issues, music commands are not avaible for now.")
-    }
+    
     try {
       if (cooldown.has(message.author.id)) {
         return message.channel.send("To prevent spam, commands have a 5 seconds cooldown. Please wait a bit before spamming these");

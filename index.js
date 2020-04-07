@@ -13,11 +13,13 @@ let messagecounter = [0, 0, 0]
 
 const guildCreate = require('./src/events/guildCreate.js')
 const guildDelete = require('./src/events/guildDelete.js')
+
 const messageDelete = require('./src/events/messageDelete.js')
 const msg = require('./src/events/message.js')
+let dbl, DBL;
 
-const DBL = require("dblapi.js");
-const dbl = new DBL(client.config.tokens.dbl, { webhookPort: process.env.PORT, webhookAuth: client.config.dbl.webhookPassword }, client)
+DBL = require("dblapi.js");
+dbl = new DBL(client.config.tokens.dbl, { webhookPort: process.env.PORT, webhookAuth: client.config.dbl.webhookPassword }, client)
 
 
 dbl.webhook.on('posted', () => {
@@ -36,6 +38,7 @@ dbl.webhook.on('vote', vote => {
   require('./src/events/vote.js')(vote,client)
   });
 
+
   const BOATS = require('boats.js');
 const Boats = new BOATS(client.config.tokens.discord_boats);
  
@@ -48,10 +51,12 @@ client.functions = {
   findByUsername: function(guild,username) {
   return guild.members.cache.find(u => u.user.username.toLowerCase() === username.toLowerCase());
 },
+
   totalUsers: function(client) {
     let userCount = 0;
         client.guilds.cache.forEach(g => userCount += g.memberCount)
         return userCount.toLocaleString()
+
   }
 }
 
@@ -89,8 +94,9 @@ client.on('messageDelete', (message) => {
 }) 
 
 
-client.on('ready', () => {
+client.on('ready', async () => {
   console.log(`Logged in as ${client.user.tag}!`)
+
   setInterval(function(){
 Boats.postStats(client.guilds.cache.size, "674497635171696644").then(() => {
   console.log('Successfully updated server count.');
@@ -99,6 +105,7 @@ Boats.postStats(client.guilds.cache.size, "674497635171696644").then(() => {
 });
   },1800000);
   client.user.setActivity(` ${client.config.prefix}help | ${client.guilds.cache.size} servers | ${client.functions.totalUsers(client)} users`)
+
 })
 
 client.on("reconnecting", () => {
@@ -109,7 +116,8 @@ client.on("disconnect", () => {
   console.log("Disconnect!");
 });
 
-client.on('raw', () => {
+client.on('raw', p => {
+  
   messagecounter[2]+=1
 });
 
@@ -119,6 +127,10 @@ client.on('message', async message => {
 
 client.on('messageUpdate', async (oldMessage,message) => {
   msg(client,message,cooldown,dbl,messagecounter)
+});
+
+client.on('messageUpdate', async (oldMessage,message) => {
+  msg(client,message,cooldown,dbl,queue,messagecounter)
 });
 
 client.login(client.config.tokens.bot)
