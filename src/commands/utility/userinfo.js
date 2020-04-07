@@ -6,7 +6,7 @@ module.exports = {
 	description: 'Shows user info',
 	async execute(client,message,args) {
         const Discord = require('discord.js')
-        let member = client.functions.get('findByID').execute(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.get('findByUsername').execute(message.guild,args.join(' ')) || message.member
+        let member = client.functions.findByID(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.findByUsername(message.guild,args.join(' ')) || message.member
         let user = member.user
         let isabot = ''
         if (user.bot) {isabot = 'Yes'} else {isabot = 'No'}
@@ -34,7 +34,7 @@ module.exports = {
           {name: 'Last message ID :', value: user.lastMessageID, inline: true},
           {name: 'Roles :', value: rolelist}
         )
-        .setFooter('Made by Lumap#0149')
+        
         message.channel.send(e)
 	},
 };

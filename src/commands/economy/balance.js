@@ -7,7 +7,7 @@ module.exports = {
     description: 'Shows your balance',
     usage: 'pichu balance',
     async execute(client,message,args) {
-        let member = client.functions.get('findByID').execute(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.get('findByUsername').execute(message.guild,args.join(' ')) || message.member
+        let member = client.functions.findByID(message.guild,args.join(' ')) || message.mentions.members.first() || client.functions.findByUsername(message.guild,args.join(' ')) || message.member
         let user = member.user
      
         if(!economy.get(`${user.id}.bal`)) economy.set(`${user.id}.bal`, 0)

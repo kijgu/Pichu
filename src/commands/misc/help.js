@@ -29,12 +29,11 @@ function getAll(client, message) {
         .map(cat => stripIndents`**${cat[0].toUpperCase() + cat.slice(1)}** \n${commands(cat)}`)
         .reduce((string, category) => string + "\n" + category);
 
-    return message.channel.send(embed.setDescription(info)  .setFooter('Made by Link#4444 (and Lumap#0149)'));
+    return message.channel.send(embed.setDescription(info));
 }
 //random color already exists
 function getCMD(client, message, input) {
     const embed = new Discord.MessageEmbed()
-    .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
     if (!client.commands.get(input.toLowerCase())){ 
         if (!client.aliases.get(input.toLowerCase())) return message.channel.send(`No information found for command **${input.toLowerCase()}**`)
     } //done
@@ -49,5 +48,5 @@ function getCMD(client, message, input) {
         embed.setFooter(`Syntax: <> = required, [] = optional`);
     }
 
-    return message.channel.send(embed.setColor("GREEN").setDescription(info).setFooter('Syntax: <> = required, [] = optional | Made by Link#4444 (and Lumap#0149)'));
+    return message.channel.send(embed.setColor("GREEN").setDescription(info).setFooter('Syntax: <> = required, [] = optional'));
 }

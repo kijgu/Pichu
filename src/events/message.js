@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const db = require('quick.db')
 var prefixdb = new db.table('prefix')
 var economy = new db.table('economy')
-module.exports = async (client,message,cooldown,dbl,queue,messagecounter) => {
+module.exports = async (client,message,cooldown,dbl,messagecounter) => {
     messagecounter[0] += 1
    let prefix = client.config.prefix
   if (!message.guild || message.channel.type === "dm" || message.author.bot || message.author === client.user || message.webhookID) return;
@@ -44,7 +44,7 @@ module.exports = async (client,message,cooldown,dbl,queue,messagecounter) => {
       economy.add(`${message.author.id}.bal`, 1)  
       client.channels.cache.get(client.config.channels.commandExecuted).send(`${message.author.tag} executed ${command.name} in ${message.guild.name}`),
       
-      await command.execute(client, message, args, dbl, queue, messagecounter)
+      await command.execute(client, message, args, dbl, messagecounter)
 
     } catch (err) {
       let error = new Discord.MessageEmbed()

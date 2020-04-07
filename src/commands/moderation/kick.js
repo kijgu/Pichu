@@ -7,11 +7,9 @@ module.exports = {
     usage: 'pichu kick <@user/userid>',
     async execute(client,message,args) {
         if(!message.member.permissions.toArray().includes("KICK_MEMBERS")) return message.channel.send(new Discord.MessageEmbed()
-        .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
         .setColor('RANDOM')
         .setDescription('Sorry, but you don\'t have the right permissions to do that!')
-        .setFooter('Made by Lumap"0149'))
-
+        )
         let member = message.mentions.members.first() || message.guild.members.cache.get(args.join(' '))
         let reason = args.slice(1).join(' ')
         if (!reason) reason = 'No reason provided'
@@ -22,7 +20,7 @@ module.exports = {
     return member
     .kick()
     .then(() => message.channel.send(new Discord.MessageEmbed()
-    .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
+
     .setColor('RANDOM')
     .setTitle(`**${member.user.username}#${memmber.user.discriminator}** has been kicked from **${message.guild.name}**`)
     .setDescription(`Reason : ${reason}`)))

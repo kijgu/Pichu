@@ -7,8 +7,7 @@ module.exports = {
       async execute(client,message) {
           const Discord = require('discord.js')
           let embed = new Discord.MessageEmbed()
-          .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
-          .setColor('RANDOM')
+         .setColor('RANDOM')
           .setDescription('Here is some informations about pichu :')
           .addFields(
               {name: 'Creator :', value: 'Lumap#0149', inline: true},
@@ -17,7 +16,7 @@ module.exports = {
               {name: 'Am I going to evolve ?', value: 'No', inline: true},
 	  
           )
-          .setFooter('Thanks to Lumine#7367 for the pfp! | Made by Lumap#0149')
+          .setFooter('Thanks to Lumine#7367 for the pfp!')
           message.channel.send(embed)
       },
   };
