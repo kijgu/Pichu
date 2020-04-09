@@ -6,7 +6,7 @@ module.exports = {
   usage: 'pichu eval <js code>',
   description: 'Eval something',
   category: 'owner',
-  async execute(client,message,args,dbl,queue) {
+  async execute(client,message,args,dbl,messagecounter,queue) {
    try {
       const code = args.join(" ");
       let evaled = await eval(code);

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const db = require('quick.db')
 var prefixdb = new db.table('prefix')
 var economy = new db.table('economy')
-module.exports = async (client,message,cooldown,dbl,messagecounter) => {
+module.exports = async (client,message,cooldown,dbl,messagecounter,queue) => {
     messagecounter[0] += 1
    let prefix = client.config.prefix
   if (!message.guild || message.channel.type === "dm" || message.author.bot || message.author === client.user || message.webhookID) return;
@@ -42,17 +42,18 @@ module.exports = async (client,message,cooldown,dbl,messagecounter) => {
       economy.add(`${message.author.id}.bal`, 1)  
       client.channels.cache.get(client.config.channels.commandExecuted).send(`${message.author.tag} executed ${command.name} in ${message.guild.name}`),
       
-      await command.execute(client, message, args, dbl, messagecounter)
+      await command.execute(client, message, args, dbl, messagecounter,queue)
 
     } catch (err) {
       let error = new Discord.MessageEmbed()
       .setAuthor(client.user.tag, client.user.avatarURL({format: 'png', dynamic: true, size: 2048}))
         .setColor('RED')
         .setAuthor('Oops! Something went wrong!')
-        .setDescription(`Woopsie doopsie, something went wrong! You can find the error right below. If you can't figure woh to get around this issue, please contace ${client.config.ownerTag}`)
+        .setDescription(`Woopsie doopsie, something went wrong! You can find the error right below. If you can't figure how to get around this issue, please contact ${client.config.ownerTag}`)
         .addFields(
           { name: 'Error :', value: `\`\`\`js\n${err}\`\`\`` })
       message.reply(error)
+      console.log(err)
       error.setTitle(`Command : ${command.name}`)
       client.channels.cache.get(client.config.channels.error).send(error)
       

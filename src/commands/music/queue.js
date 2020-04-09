@@ -1,12 +1,10 @@
 module.exports = {
     name: 'queue',
-    aliases: ['nowplaying', 'q', 'np'],
-
+    aliases: ['q'],
     usage: 'pichu queue',
-
     category: 'music',
       description: 'Shows server queue',
-      async execute(client,message,args,dbl,queue) {
+      async execute(client,message,args,dbl,messagecounter,queue) {
 
         const serverQueue = queue.get(message.guild.id);
 

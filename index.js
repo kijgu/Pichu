@@ -8,7 +8,7 @@ client.config = config
 client.version = require('./package.json').version
 client.snipes = new Discord.Collection()
 let cooldown = new Set()
-let queue = new Map()
+const queue = new Map()
 let messagecounter = [0, 0, 0] 
 
 const guildCreate = require('./src/events/guildCreate.js')
@@ -122,16 +122,14 @@ client.on('raw', p => {
 });
 
 client.on('message', async message => {
-  msg(client,message,cooldown,dbl,messagecounter)
+  msg(client,message,cooldown,dbl,messagecounter,queue)
 });
 
 client.on('messageUpdate', async (oldMessage,message) => {
-  msg(client,message,cooldown,dbl,messagecounter)
+  msg(client,message,cooldown,dbl,messagecounter,queue)
 });
 
-client.on('messageUpdate', async (oldMessage,message) => {
-  msg(client,message,cooldown,dbl,queue,messagecounter)
-});
+
 
 client.login(client.config.tokens.bot)
 
