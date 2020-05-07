@@ -3,6 +3,7 @@ module.exports = async (client,message) => {
     if (!message.content) return;
     client.snipes.set(message.channel.id, {
       content: message.content,
-      user: message.author
+      user: message.author,
+      timestamp: Date.now()
     })
 }

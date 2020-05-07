@@ -1,25 +1,5 @@
 {
-    "ownerID": "635383782576357407",
-    "ownerTag": "Lumap#0149",
-    "port": "5000",
-    "prefix": "pichu ",
-    "tokens": {
-        "discord_boats": "discord boats token",
-        "bot": "bot token",
-        "dbl": "dbl token",
-        "ksoft": "ksoftsi token"
-        },
-      
-    "dbl": {
-        "webhookPassword": "dbl webhook auth",
-        "voteChannelID": "channel id"
-        
-      },
-    "channels": {
-        "shardReady": "channel id",
-        "guildCreate": "channel id",
-        "guildDelete": "channel id",
-        "commandExecuted": "channel id",
-        "error": "channel id"
-    }
+    "ownerID": [""],
+    "prefix": "",
+    "token": ""
 }
